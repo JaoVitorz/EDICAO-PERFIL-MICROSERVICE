@@ -1,0 +1,41 @@
+### Exemplos de uso da API de Perfil
+
+### Health Check
+GET http://localhost:3001/health
+
+### Buscar perfil do usuário autenticado
+GET http://localhost:3001/api/profile/me
+Authorization: Bearer seu_token_jwt_aqui
+
+### Atualizar perfil do usuário autenticado
+PUT http://localhost:3001/api/profile/me
+Content-Type: application/json
+Authorization: Bearer seu_token_jwt_aqui
+
+{
+  "nome": "João Silva",
+  "telefone": "(11) 99999-9999",
+  "data_nascimento": "1990-01-15",
+  "bio": "Amo animais e sou voluntário em uma ONG",
+  "cidade": "São Paulo",
+  "estado": "SP",
+  "cep": "01234-567",
+  "endereco": "Rua Exemplo",
+  "numero": "123",
+  "complemento": "Apto 45"
+}
+
+### Buscar perfil por ID
+GET http://localhost:3001/api/profile/1
+Authorization: Bearer seu_token_jwt_aqui
+
+### Atualizar perfil por ID
+PUT http://localhost:3001/api/profile/1
+Content-Type: application/json
+Authorization: Bearer seu_token_jwt_aqui
+
+{
+  "nome": "João Silva Atualizado",
+  "bio": "Nova bio atualizada"
+}
+

@@ -1,0 +1,31 @@
+### Exemplo de Upload de Foto de Perfil
+
+### Upload de foto de perfil (multipart/form-data)
+POST http://localhost:3001/api/profile/me/photo
+Authorization: Bearer seu_token_jwt_aqui
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="foto"; filename="profile.jpg"
+Content-Type: image/jpeg
+
+< ./caminho/para/sua/imagem.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+### Nota: Para usar com curl:
+# curl -X POST http://localhost:3001/api/profile/me/photo \
+#   -H "Authorization: Bearer seu_token_jwt_aqui" \
+#   -F "foto=@/caminho/para/sua/imagem.jpg"
+
+### Para usar com JavaScript/FormData:
+# const formData = new FormData();
+# formData.append('foto', fileInput.files[0]);
+# 
+# fetch('http://localhost:3001/api/profile/me/photo', {
+#   method: 'POST',
+#   headers: {
+#     'Authorization': 'Bearer seu_token_jwt_aqui'
+#   },
+#   body: formData
+# })
+
