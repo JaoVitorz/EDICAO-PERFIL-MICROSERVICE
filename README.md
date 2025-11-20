@@ -319,5 +319,6 @@ Veja o arquivo `examples/frontend-integration.js` para exemplos de como integrar
 ## 📄 Licença
 
 ISC
-#   E D I C A O - P E R F I L - M I C R O S E R V I C E  
+#   E D I C A O - P E R F I L - M I C R O S E R V I C E 
+ 
  
