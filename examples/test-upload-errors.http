@@ -1,0 +1,84 @@
+### Teste de Upload de Foto de Perfil
+### Substitua o {token} pelo seu JWT token válido
+
+# ============================================
+# 1. Upload Válido
+# ============================================
+POST http://localhost:3004/api/profile/me/photo
+Authorization: Bearer {token}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="foto"; filename="perfil.jpg"
+Content-Type: image/jpeg
+
+< ./caminho/para/sua/imagem.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+###
+# ============================================
+# 2. Teste sem arquivo (deve retornar erro)
+# ============================================
+POST http://localhost:3004/api/profile/me/photo
+Authorization: Bearer {token}
+Content-Type: multipart/form-data
+
+
+###
+# ============================================
+# 3. Teste com arquivo muito grande
+# (arquivo maior que 5MB deve retornar erro)
+# ============================================
+POST http://localhost:3004/api/profile/me/photo
+Authorization: Bearer {token}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="foto"; filename="foto-grande.jpg"
+Content-Type: image/jpeg
+
+< ./caminho/para/imagem-maior-que-5mb.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+###
+# ============================================
+# 4. Teste com arquivo não-imagem
+# (deve retornar erro de tipo inválido)
+# ============================================
+POST http://localhost:3004/api/profile/me/photo
+Authorization: Bearer {token}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="foto"; filename="documento.pdf"
+Content-Type: application/pdf
+
+< ./caminho/para/documento.pdf
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+###
+# ============================================
+# 5. Teste com nome de campo incorreto
+# (deve retornar erro - campo esperado é "foto")
+# ============================================
+POST http://localhost:3004/api/profile/me/photo
+Authorization: Bearer {token}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="imagem"; filename="perfil.jpg"
+Content-Type: image/jpeg
+
+< ./caminho/para/sua/imagem.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+###
+# ============================================
+# 6. Buscar perfil atualizado
+# ============================================
+GET http://localhost:3004/api/profile/me
+Authorization: Bearer {token}

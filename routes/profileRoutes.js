@@ -1,9 +1,15 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const profileController = require('../controllers/profileController');
-const { authenticateToken, verifyOwnership } = require('../middleware/auth');
-const { validateProfileUpdate } = require('../middleware/validation');
-const { upload, uploadProfilePhoto } = require('../middleware/upload');
+const profileController = require("../controllers/profileController");
+const { authenticateToken, verifyOwnership } = require("../middleware/auth");
+const { validateProfileUpdate } = require("../middleware/validation");
+const {
+  upload,
+  uploadAny,
+  uploadProfilePhoto,
+  handleMulterError,
+  debugRequest,
+} = require("../middleware/upload");
 
 /**
  * @swagger
@@ -21,7 +27,7 @@ const { upload, uploadProfilePhoto } = require('../middleware/upload');
  *       404:
  *         description: Perfil não encontrado
  */
-router.get('/me', authenticateToken, profileController.getMyProfile);
+router.get("/me", authenticateToken, profileController.getMyProfile);
 
 /**
  * @swagger
@@ -69,7 +75,12 @@ router.get('/me', authenticateToken, profileController.getMyProfile);
  *       401:
  *         description: Não autenticado
  */
-router.put('/me', authenticateToken, validateProfileUpdate, profileController.updateMyProfile);
+router.put(
+  "/me",
+  authenticateToken,
+  validateProfileUpdate,
+  profileController.updateMyProfile
+);
 
 /**
  * @swagger
@@ -97,7 +108,15 @@ router.put('/me', authenticateToken, validateProfileUpdate, profileController.up
  *       401:
  *         description: Não autenticado
  */
-router.post('/me/photo', authenticateToken, upload.single('foto'), uploadProfilePhoto, profileController.uploadProfilePhoto);
+router.post(
+  "/me/photo",
+  authenticateToken,
+  debugRequest,
+  uploadAny,
+  handleMulterError,
+  uploadProfilePhoto,
+  profileController.uploadProfilePhoto
+);
 
 /**
  * @swagger
@@ -119,7 +138,7 @@ router.post('/me/photo', authenticateToken, upload.single('foto'), uploadProfile
  *       404:
  *         description: Perfil não encontrado
  */
-router.get('/:userId', authenticateToken, profileController.getProfile);
+router.get("/:userId", authenticateToken, profileController.getProfile);
 
 /**
  * @swagger
@@ -173,7 +192,12 @@ router.get('/:userId', authenticateToken, profileController.getProfile);
  *       404:
  *         description: Perfil não encontrado
  */
-router.put('/:userId', authenticateToken, verifyOwnership, validateProfileUpdate, profileController.updateProfile);
+router.put(
+  "/:userId",
+  authenticateToken,
+  verifyOwnership,
+  validateProfileUpdate,
+  profileController.updateProfile
+);
 
 module.exports = router;
-
