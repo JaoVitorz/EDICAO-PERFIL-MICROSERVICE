@@ -12,8 +12,16 @@ const PORT = process.env.PORT || 3004;
 // Middlewares
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN || "http://localhost:3000",
+    origin: [
+      "https://edicao-perfil-microservice.onrender.com",
+      
+      "http://localhost:3000",
+      "http://localhost:5000",
+      "http://localhost:3004",
+    ],
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "x-api-key", "accept"],
   })
 );
 
@@ -27,6 +35,14 @@ app.use((req, res, next) => {
 });
 
 // Health check
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "🚀 Micro-serviço de Perfil está funcionando!",
+    timestamp: new Date().toISOString(),
+  });
+});
+
 app.get("/health", (req, res) => {
   res.json({
     success: true,
