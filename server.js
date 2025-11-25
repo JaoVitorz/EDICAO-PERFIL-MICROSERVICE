@@ -13,15 +13,16 @@ const PORT = process.env.PORT || 3004;
 app.use(
   cors({
     origin: [
+      "https://pet-joyful-projeto-integrador-next-js-ay4p-csdp9roes.vercel.app",
       "https://pet-joyful-projeto-integrador-next-js-ay4p-kzbr9m9bu.vercel.app",
       "https://edicao-perfil-microservice.onrender.com",
-
+      "https://pet-joyful-backend-1.onrender.com",
       "http://localhost:3000",
       "http://localhost:5000",
       "http://localhost:3004",
     ],
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allowedHeaders: ["Content-Type", "Authorization", "x-api-key", "accept"],
   })
 );
