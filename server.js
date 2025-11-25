@@ -4,6 +4,7 @@ require("dotenv").config();
 
 const { connectDB, closeConnection } = require("./config/database");
 const profileRoutes = require("./routes/profileRoutes");
+const albumRoutes = require("./routes/albumRoutes");
 const { swaggerUi, swaggerSpec } = require("./swagger");
 
 const app = express();
@@ -13,8 +14,9 @@ const PORT = process.env.PORT || 3004;
 app.use(
   cors({
     origin: [
+      "https://pet-joyful-projeto-integrador-next-js-ay4p-kzbr9m9bu.vercel.app",
       "https://edicao-perfil-microservice.onrender.com",
-      
+
       "http://localhost:3000",
       "http://localhost:5000",
       "http://localhost:3004",
@@ -56,6 +58,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Routes
 app.use("/api/profile", profileRoutes);
+app.use("/api/albums", albumRoutes);
 
 // 404 handler
 app.use((req, res) => {
