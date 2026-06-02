@@ -17,6 +17,8 @@ app.use(
       "https://pet-joyful-projeto-integrador-next-js-ay4p-kzbr9m9bu.vercel.app",
       "https://edicao-perfil-microservice.onrender.com",
       "https://pet-joyful-backend-1.onrender.com",
+      "https://pet-joyful-backend.onrender.com",
+      "https://pet-joyful-projeto-integrador-nextjs.onrender.com",
       "http://localhost:3000",
       "http://localhost:5000",
       "http://localhost:3004",
