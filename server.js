@@ -22,6 +22,7 @@ app.use(
       "http://localhost:3000",
       "http://localhost:5000",
       "http://localhost:3004",
+      "http://localhost:8081",
       /https:\/\/.*\.vercel\.app$/, // Permite qualquer domínio Vercel do projeto
     ],
     credentials: true,
